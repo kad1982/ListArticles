@@ -8,7 +8,7 @@
 		if (pageId != null) {
 			strPage = `?page=${pageId}`;
 		};
-		
+
 		const response = await fetch(`https://gorest.co.in/public-api/posts${strPage}`);
 		const data = await response.json();
 		return {
@@ -20,12 +20,13 @@
 	async function loadPostList() {
 		const post = await loadPosts();
 		const postList = document.querySelector('.posts_list');
+    const page = post.pagination.page
 		for (let i = 0; i < post.posts.length; i++) {
 			li = document.createElement('li');
 			a = document.createElement('a');
 			a.classList.add('post-link');
 			a.href = `post.html?id=${post.posts[i].id}`;
-			a.textContent = `Статья ${i+1}`;
+			a.textContent = `Страница ${page} Статья ${i+1}`;
 			li.append(a);
 			postList.append(li);
 		}
@@ -97,7 +98,7 @@ async function loadCommentsPost(){
 		const commentPage = document.querySelector('.comments-block');
 		for(let i=0; i<comment.comment.length;i++){
 
-		
+
 		div = document.createElement('div');
 		div.classList.add('card');
 		divCardBody = document.createElement('div');
